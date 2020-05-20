@@ -1,47 +1,34 @@
 @echo off
 title Te Amo
 color 0A
-echo ***BIENVENIDA A ESTA AVENTURA***
+echo ***BIENVENIDaA A ESTA AVENTURA***
 echo.
-echo Voy a necesitar alguna informacion 
-echo sobre ti para poder continuar.
+echo Voy a necesitar alguna informacion echo sobre ti para poder continuar.
 echo.
+cls
 pause >null
 echo Dime como quieres que te llame?
-set/p nickName=  
+set/p nombre=  
 echo.
 cls
-echo BIENVENIDO, %nickName%!
-echo.
-echo En cuanto tiempo quieres 
-echo que ponga otro exitante 
-echo capitulo de Dragon Ball, %nickName%?
-echo. 
-echo Selecciona una opcion:
-echo.
-echo 1. 5 minutos
-echo 2. 10 minutos
-echo 3. 15 mintuos
-echo 4. Ahora mismo. Maldita sea!!!
-echo.
-set/p tiempo=Escribe un numero del 1 al 4 y presiona ENTER:  
-echo.  
-echo Cual capitulo quieres reproducir?
-set/p capitulo=  
-cls
-echo %nickName%, reproducire Dragon Ball, capitulo %capitulo%
-
-
-goto %tiempo%
-
-:1
-echo opcion1
-:2
-echo opcion2
-:3
-echo opcion3
-:4
-echo opcion4
-
-pause
-exit
+REM echo BIENVENIDO, %nombre%!
+REM echo.
+REM echo En cuanto tiempo quieres 
+REM echo que ponga otro exitante 
+REM echo capitulo de Dragon Ball, %nombre%?
+REM echo. 
+REM echo Selecciona una opcion:
+REM echo.
+REM echo 1. 5 minutos
+REM echo 2. 10 minutos
+REM echo 3. 15 mintuos
+REM echo 4. Ahora mismo. Maldita sea!!!
+REM echo.
+REM set/p tiempo=Escribe un numero del 1 al 4 y presiona ENTER:  
+REM echo.  
+REM echo Cual capitulo quieres reproducir?
+REM set/p capitulo=  
+REM cls
+REM echo %nombre%, reproducire Dragon Ball, capitulo %capitulo%
+REM pause
+REM exit
