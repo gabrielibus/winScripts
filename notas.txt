@@ -1,0 +1,7 @@
+Definir variables:
+	set var=contenido; 
+	set/p var=algo #pedir input a usuario
+	set/a var=%var1% + 2 #Para definir operaciónes con variables
+
+Invocar variables 
+	%var% 
