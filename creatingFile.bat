@@ -3,7 +3,6 @@ setlocal EnableDelayedExpansion
 title Instalador Virus
 
 REM VARIABLES
-set /a actualLevel=0
 set level[00]=basics office desing games
 set level[11]=compressTools chrome frameworks 7zip otros volver
 set level[12]=office1010 office2013 office1060 office2019 ProjetYVisio activadore volver
@@ -42,18 +41,36 @@ REM Start function
 
 
 
+set param[0]=root
 
 :start
-set /a level=0
+    set /a level=0
+    set title=root
     call :listMenu %level[00]%
     call :next
 
 REM Functions
 REM LISTMENU. param: array for print, return user selected option
 :listMenu 
+
+    
     call :intro
+
+    set param[1]=%1
+    set param[2]=%2
+    set param[3]=%3
+    set param[4]=%4
+    set param[5]=%5
+    set param[6]=%6
+    set param[7]=%7
+    set param[8]=%8
+    set param[9]=%9
+
     set array=%1 %2 %3 %4 %5 %6 %7 %8 %9
     set /a cont=1
+    call :separadorIn
+    echo. 
+    echo %title%
     call :separadorIn
     echo.
         for %%i in (%array%) do (
@@ -65,24 +82,26 @@ REM LISTMENU. param: array for print, return user selected option
     goto :eof
 
 
-
-REM NEXT. param: userInput
-
 :next
+    set temp=param[%userInput%]
+    REM if %userInput%==0 (set title=%param[0]%)
+    REM if not %userInput%==0 (set title=%title% / !param[%userInput%]!)
+
     if not %userInput%==0 (
         set /a level+=1
-        set algo=!level!%userInput%
         set nextStep=level[!level!!userInput!]
+        set title=!param[%userInput%]!
         )
     if %userInput%==0 (
         set /a level-=1
+        if !level! LEQ 0 (set /a level=0)
         set nextStep=level[!level!!level!]
+        set  title=%param[0]%
         )
-        echo siguiente nivel sera %nextStep%
-        pause >nul
+    REM set param[0]=%title%
+        
+    
     call :listMenu !%nextStep%!
     call :next
-
-REM Hasta aquí funciona perfectamente el buccle de autollamado ESTES!!!!!!!!!!!!!
 
 pause
