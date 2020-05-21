@@ -4,7 +4,7 @@ title Instalador Virus
 
 REM VARIABLES
 set /a actualLevel=0
-set level[01]=basics office desing games
+set level[00]=basics office desing games
 set level[11]=compressTools chrome frameworks 7zip otros volver
 set level[12]=office1010 office2013 office1060 office2019 ProjetYVisio activadore volver
 set level[13]=Adobe Autodesk Rhino Chaos Otros volver
@@ -45,8 +45,7 @@ REM Start function
 
 :start
 set /a level=0
-    call :listMenu %level[01]%
-
+    call :listMenu %level[00]%
     call :next
 
 REM Functions
@@ -70,10 +69,18 @@ REM LISTMENU. param: array for print, return user selected option
 REM NEXT. param: userInput
 
 :next
-    if %userInput%==0 (call :start)
-    set /a level+=1
-    set nextStep=!level[%level%%userInput%]!
-    call :listMenu %nextStep%
+    if not %userInput%==0 (
+        set /a level+=1
+        set algo=!level!%userInput%
+        set nextStep=level[!level!!userInput!]
+        )
+    if %userInput%==0 (
+        set /a level-=1
+        set nextStep=level[!level!!level!]
+        )
+        echo siguiente nivel sera %nextStep%
+        pause >nul
+    call :listMenu !%nextStep%!
     call :next
 
 REM Hasta aquí funciona perfectamente el buccle de autollamado ESTES!!!!!!!!!!!!!
