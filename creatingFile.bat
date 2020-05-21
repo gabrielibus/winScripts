@@ -3,14 +3,23 @@ setlocal EnableDelayedExpansion
 title Instalador Virus
 
 REM VARIABLES
-set level[0]=InstaladoresBasicos Ofimatica CADyDisegno
-set level[1]=winzip chrome frameworks 7zip otros volver
-set level[2]=office1010 office2013 office1060 office2019 ProjetYVisio activadore volver
-set level[3]=Adobe Autodesk Rhino Chaos Otros volver
+set /a actualLevel=0
+set level[01]=basics office desing games
+set level[11]=compressTools chrome frameworks 7zip otros volver
+set level[12]=office1010 office2013 office1060 office2019 ProjetYVisio activadore volver
+set level[13]=Adobe Autodesk Rhino Chaos Otros volver
 
+set level[21]=winzip32 winzip64 7zip
+set level[22]=chrome32
+set level[23]=frmawrks64
+
+
+REM `siguiente level[+1,userInput!=0]
+REM anterior level[-1x2]
 
 call :start
 
+REM Styles and Input
 :intro
     echo    ***Bienvenido Virus***
     echo       virustaller v0.1  
@@ -23,40 +32,50 @@ call :start
 
 :separadorIn
     echo ____________________________
-    echo.
     goto :eof
 
 :separadorOut
-    echo.
     echo ____________________________
     goto :eof
 
-
 REM Start function
-:start
-    call :intro
-    call :listMenu %level[0]%
 
+
+
+
+:start
+set /a level=0
+    call :listMenu %level[01]%
+
+    call :next
+
+REM Functions
+REM LISTMENU. param: array for print, return user selected option
 :listMenu 
-    setlocal
+    call :intro
     set array=%1 %2 %3 %4 %5 %6 %7 %8 %9
-        set /a cont=1
+    set /a cont=1
     call :separadorIn
+    echo.
         for %%i in (%array%) do (
         echo [!cont!]. %%i
-        set /a cont= !cont!+1
-        )
-        echo.
-        echo [0]. Go back
+        set /a cont= !cont!+1)
     call :separadorOut
-        endlocal & echo.
-        call :userInput
-        cls
-        endlocal & call :next %userInput%
+    echo.
+    call :userInput
+    goto :eof
+
+
+
+REM NEXT. param: userInput
 
 :next
-    setlocal
-    set nextStep=!level[%1%]!
+    if %userInput%==0 (call :start)
+    set /a level+=1
+    set nextStep=!level[%level%%userInput%]!
     call :listMenu %nextStep%
+    call :next
+
+REM Hasta aquí funciona perfectamente el buccle de autollamado ESTES!!!!!!!!!!!!!
 
 pause
