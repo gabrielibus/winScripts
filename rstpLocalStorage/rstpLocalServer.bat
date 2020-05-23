@@ -2,7 +2,7 @@
 color 0e
 
 REM //SETTINGS
-SET record_time=10
+SET record_time=3600
 SET rootLetter=D:
 SET folder=DVR
 SET vlcPath=C:\Program Files (x86)\VideoLAN\VLC
@@ -54,7 +54,7 @@ REM     ECHO %logfile% >> log.txt
     SET id=%~1
     call :date_now
     SET options=-vvv !cam%id%_url! --sout "#file{dst=%rootLetter%\\%folder%\\!cam%id%_name!\\!cam%id%_name!-%now%.mpg,no-overwrite}"
-    start vlc %options%  
+    start vlc --qt-start-minimized %options%  
     goto :eof
 
 :date_now
