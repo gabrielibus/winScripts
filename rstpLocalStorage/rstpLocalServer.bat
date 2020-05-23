@@ -6,14 +6,12 @@ call config.bat
 call :date_now
 call :create_folders
 SET cont=0
-REM CD %vlcPath%
 SET start_time=%now%
-REM //error level
 
 :loop
     cls
     call :calc_free_space
-    call :mensaje1
+    call :msj
     call :recordCam 1
     call :recordCam 2
     call :recordCam 3
@@ -37,10 +35,10 @@ REM     ECHO %logfile% >> log.txt
 :recordCam id
     @setlocal enableextensions enabledelayedexpansion
     SET id=%~1
-    call :date_now
+    REM call :date_now
     SET options=-vvv !cam%id%_url! --sout "#file{dst=%rootLetter%\\%folder%\\!cam%id%_name!\\!cam%id%_name!-%now%.mpg,no-overwrite}"
-    call "%vlcPath%\vlc" %minimized% %options%  
-
+    REM call "%vlcPath%\vlc.exe"
+    start "titulo" "%vlcPath%\vlc.exe" %minimized% %options%  
     echo !cam%id%_name! start recording succsseful
     goto :eof
 
@@ -70,11 +68,11 @@ REM     ECHO %logfile% >> log.txt
     if not exist "%rootLetter%\%folder%\%cam4_name%" mkdir "%rootLetter%\%folder%\%cam4_name%"
     goto :eof
 
-:mensaje1
+:msj
         ECHO ==================================================================
         ECHO Espacio libre en el disco %rootLetter% - %gb%GB / %mb%MB / %kb%KB
         if %gb% lss 10 @ECHO ATENCION!!!: %gb% disponibles en el disco.
         ECHO Unidad de grabacion: %rootLetter%/%folder%
         ECHO Fecha y hora de inicio: %day%-%month%-%year%, %hour%:%minute%:%second% %timezone%
         ECHO ==================================================================
-
+        goto :eof
