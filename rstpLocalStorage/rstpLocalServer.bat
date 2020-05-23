@@ -6,7 +6,7 @@ call config.bat
 call :date_now
 call :create_folders
 SET cont=0
-CD %vlcPath%
+REM CD %vlcPath%
 SET start_time=%now%
 REM //error level
 
@@ -39,7 +39,8 @@ REM     ECHO %logfile% >> log.txt
     SET id=%~1
     call :date_now
     SET options=-vvv !cam%id%_url! --sout "#file{dst=%rootLetter%\\%folder%\\!cam%id%_name!\\!cam%id%_name!-%now%.mpg,no-overwrite}"
-    start vlc --qt-start-minimized %options%  
+    call "%vlcPath%\vlc" %minimized% %options%  
+
     echo !cam%id%_name! start recording succsseful
     goto :eof
 

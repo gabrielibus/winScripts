@@ -13,3 +13,5 @@ SET cam1_URL=rtsp://admin:virus1818@192.168.1.68/ch0_0.h264
 SET cam2_URL=rtsp://admin:virus1818@192.168.1.59/ch0_0.h264
 SET cam3_URL=rtsp://admin:virus1818@192.168.1.69/ch0_0.h264
 SET cam4_URL=rtsp://admin:virus1818@192.168.1.67/ch0_0.h264
+
+REM SET minimized=--qt-start-minimized
