@@ -16,29 +16,16 @@ SET start_time=%now%
     call :recordCam 2
     call :recordCam 3
     call :recordCam 4
-
-REM     call :setlog
-
-REM :setlog
-REM     SET start=""
-REM     if %cont%==0 (SET start=Hora de inicio: %start_time%)
-
-REM     SET logfile=%start%   
-REM     ECHO %logfile% >> log.txt
-    
-    timeout /t %record_time% >nul
-    taskkill /f /im "vlc.exe" 
-
-    SET /a cont+=1
-    goto loop
+    call :setlog
+    call :stop_record
+    goto :loop
 
 :recordCam id
     @setlocal enableextensions enabledelayedexpansion
     SET id=%~1
-    REM call :date_now
+    call :date_now
     SET options=-vvv !cam%id%_url! --sout "#file{dst=%rootLetter%\\%folder%\\!cam%id%_name!\\!cam%id%_name!-%now%.mpg,no-overwrite}"
-    REM call "%vlcPath%\vlc.exe"
-    start "titulo" "%vlcPath%\vlc.exe" %minimized% %options%  
+    start "titulo" "%vlcPath%\vlc.exe" %params% %options%  
     echo !cam%id%_name! start recording succsseful
     goto :eof
 
@@ -76,3 +63,20 @@ REM     ECHO %logfile% >> log.txt
         ECHO Fecha y hora de inicio: %day%-%month%-%year%, %hour%:%minute%:%second% %timezone%
         ECHO ==================================================================
         goto :eof
+
+:setlog
+    SET start=""
+    if %cont%==0 (echo Hora de inicio: %start_time% %timezone% >> log.txt)
+    if not %cont%==0 (echo cicle %cont% succsseful >> log.txt )
+    REM SET logfile=%start% cicle %cont% succsseful   
+    REM ECHO %logfile% >> log.txt
+    SET /a cont+=1
+    goto :eof
+    
+:stop_record
+    timeout /t %record_time% >nul
+    taskkill /f /im "vlc.exe" 
+    goto :eof
+
+
+    

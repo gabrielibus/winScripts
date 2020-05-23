@@ -1,4 +1,4 @@
-SET record_time=3600
+SET record_time=1800
 SET rootLetter=D:
 SET folder=DVR
 SET vlcPath=C:\Program Files (x86)\VideoLAN\VLC
@@ -14,5 +14,5 @@ SET cam2_URL=rtsp://admin:virus1818@192.168.1.59/ch0_0.h264
 SET cam3_URL=rtsp://admin:virus1818@192.168.1.69/ch0_0.h264
 SET cam4_URL=rtsp://admin:virus1818@192.168.1.67/ch0_0.h264
 
+SET params=--no-qt-system-tray 
 echo variables loaded succsseful
-REM SET minimized=--qt-start-minimized
