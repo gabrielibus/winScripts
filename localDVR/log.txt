@@ -1,1 +1,1 @@
-start_record: GTM-5 - 19 cicles - max_records=
+start_record: GTM-5 - 2 cicles - max_records=

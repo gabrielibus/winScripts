@@ -88,6 +88,7 @@ call :loop
     goto :eof
     
 :stop_record
+    echo updated: %now%
     timeout /t %record_time% >nul
     taskkill /f /im "vlc.exe" 
     goto :eof
