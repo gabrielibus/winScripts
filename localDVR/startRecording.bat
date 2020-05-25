@@ -3,7 +3,10 @@ setlocal enabledelayedexpansion
 color 0e
 SET del_position=0
 
-call config.bat
+:: Inporting variables from config.ini
+FOR /F "tokens=*" %%a in (config.ini) do (
+    SET %%a
+)
 
 call :date_now
 call :create_folders
@@ -26,17 +29,18 @@ SET start_time=%now%
     SET id=%~1
     call :date_now
     SET file_name[%cont%]=%rootLetter%\%folder%\!cam%id%_name!\!cam%id%_name!-%now%.mpg
+    SET del_file[%cont%-%id%]=%rootLetter%\%folder%\!cam%id%_name!\!cam%id%_name!-%now%.mpg
     SET options=-vvv !cam%id%_url! --sout "#file{dst=!file_name[%cont%]!,no-overwrite}"
     start "titulo" "%vlcPath%\vlc.exe" %params% %options%  
     echo !cam%id%_name! start recording succsseful
-    echo file: %del_file% deleted!>>log.txt
-    SET del_file=!file_name[%del_position%]!
+    
     if %cont%==%max% (
-        del %del_file%
+        del !del_file[%del_position%-1]!
+        del !del_file[%del_position%-2]!
+        del !del_file[%del_position%-3]!
+        del !del_file[%del_position%-4]!
         SET /a del_position+=1
         SET /a max+=1
-        echo %del_file% %del_position% %max% >> log.txt
-        pause
         )
     goto :eof
 
