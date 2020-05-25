@@ -1,0 +1,12 @@
+file:  deleted
+file: D:\DVR\nubiaCam1\nubiaCam1-24-05-2020_10-34-23.mpg deleted
+file: D:\DVR\nubiaCam2\nubiaCam2-24-05-2020_10-34-23.mpg deleted
+file: D:\DVR\nubiaCam3\nubiaCam3-24-05-2020_10-34-23.mpg deleted
+Hora de inicio: 24-05-2020_10-34-23 GTM-5 
+file: D:\DVR\nubiaCam4\nubiaCam4-24-05-2020_10-34-23.mpg deleted
+file: D:\DVR\nubiaCam4\nubiaCam4-24-05-2020_10-34-23.mpg deleted
+file: D:\DVR\nubiaCam4\nubiaCam4-24-05-2020_10-34-23.mpg deleted
+file: D:\DVR\nubiaCam4\nubiaCam4-24-05-2020_10-34-23.mpg deleted
+cicle 1 succsseful  
+file: D:\DVR\nubiaCam4\nubiaCam4-24-05-2020_10-34-23.mpg deleted
+D:\DVR\nubiaCam4\nubiaCam4-24-05-2020_10-34-23.mpg 0 2 

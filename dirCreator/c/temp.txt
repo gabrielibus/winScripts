@@ -1,0 +1,1 @@
+DIR C:\Users\CompuFacilito\Desktop\code\winScripts\dirCreator\c\ /b /A:D 

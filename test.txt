@@ -1,3 +1,0 @@
-opcion1,
-opcion2,
-opcion3

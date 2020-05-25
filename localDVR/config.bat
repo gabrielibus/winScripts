@@ -1,8 +1,10 @@
-SET record_time=1800
+SET record_time=3
 SET rootLetter=D:
 SET folder=DVR
 SET vlcPath=C:\Program Files (x86)\VideoLAN\VLC
 SET timezone=GTM-5
+SET max=2
+
 
 SET cam1_name=nubiaCam1
 SET cam2_name=nubiaCam2

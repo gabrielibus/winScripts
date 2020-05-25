@@ -1,5 +1,7 @@
 @ECHO off
+setlocal enabledelayedexpansion
 color 0e
+SET del_position=0
 
 call config.bat
 
@@ -16,17 +18,26 @@ SET start_time=%now%
     call :recordCam 2
     call :recordCam 3
     call :recordCam 4
-    call :setlog
     call :stop_record
+    call :setlog
     goto :loop
 
 :recordCam id
-    @setlocal enableextensions enabledelayedexpansion
     SET id=%~1
     call :date_now
-    SET options=-vvv !cam%id%_url! --sout "#file{dst=%rootLetter%\\%folder%\\!cam%id%_name!\\!cam%id%_name!-%now%.mpg,no-overwrite}"
+    SET file_name[%cont%]=%rootLetter%\%folder%\!cam%id%_name!\!cam%id%_name!-%now%.mpg
+    SET options=-vvv !cam%id%_url! --sout "#file{dst=!file_name[%cont%]!,no-overwrite}"
     start "titulo" "%vlcPath%\vlc.exe" %params% %options%  
     echo !cam%id%_name! start recording succsseful
+    echo file: %del_file% deleted!>>log.txt
+    SET del_file=!file_name[%del_position%]!
+    if %cont%==%max% (
+        del %del_file%
+        SET /a del_position+=1
+        SET /a max+=1
+        echo %del_file% %del_position% %max% >> log.txt
+        pause
+        )
     goto :eof
 
 :date_now
@@ -68,8 +79,6 @@ SET start_time=%now%
     SET start=""
     if %cont%==0 (echo Hora de inicio: %start_time% %timezone% >> log.txt)
     if not %cont%==0 (echo cicle %cont% succsseful >> log.txt )
-    REM SET logfile=%start% cicle %cont% succsseful   
-    REM ECHO %logfile% >> log.txt
     SET /a cont+=1
     goto :eof
     

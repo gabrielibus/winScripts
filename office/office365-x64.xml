@@ -1,0 +1,17 @@
+<!-- The following sample allows you to download and install Office 2019 Professional Plus,
+     Visio 2019 Professional, and Project 2019 Professional directly from the Office CDN.
+ -->
+
+<Configuration>
+
+  <Add OfficeClientEdition="64" Channel="Monthly">
+    <Product ID="O365ProPlusRetail">
+      <Language ID="es-MX" />
+    </Product>
+  </Add>
+
+   <Updates Enabled="FALSE" Channel="Monthly" />
+   <Display Level="None" AcceptEULA="TRUE" /> 
+   <Property Name="AUTOACTIVATE" Value="1" /> 
+
+</Configuration>
