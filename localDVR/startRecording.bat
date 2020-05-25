@@ -1,7 +1,10 @@
 @ECHO off
 setlocal enabledelayedexpansion
 color 0e
+
 SET del_position=0
+SET cont=0
+SET start_time=%now%
 
 :: Inporting variables from config.ini
 FOR /F "tokens=*" %%a in (config.ini) do (
@@ -10,8 +13,7 @@ FOR /F "tokens=*" %%a in (config.ini) do (
 
 call :date_now
 call :create_folders
-SET cont=0
-SET start_time=%now%
+call :loop
 
 :loop
     cls
@@ -31,16 +33,16 @@ SET start_time=%now%
     SET file_name[%cont%]=%rootLetter%\%folder%\!cam%id%_name!\!cam%id%_name!-%now%.mpg
     SET del_file[%cont%-%id%]=%rootLetter%\%folder%\!cam%id%_name!\!cam%id%_name!-%now%.mpg
     SET options=-vvv !cam%id%_url! --sout "#file{dst=!file_name[%cont%]!,no-overwrite}"
-    start "titulo" "%vlcPath%\vlc.exe" %params% %options%  
+    start "titulo" "%vlcPath%\vlc.exe" %vlc_params% %options%  
     echo !cam%id%_name! start recording succsseful
     
-    if %cont%==%max% (
+    if %cont%==%max_records% (
         del !del_file[%del_position%-1]!
         del !del_file[%del_position%-2]!
         del !del_file[%del_position%-3]!
         del !del_file[%del_position%-4]!
         SET /a del_position+=1
-        SET /a max+=1
+        SET /a max_records+=1
         )
     goto :eof
 
@@ -81,8 +83,7 @@ SET start_time=%now%
 
 :setlog
     SET start=""
-    if %cont%==0 (echo Hora de inicio: %start_time% %timezone% >> log.txt)
-    if not %cont%==0 (echo cicle %cont% succsseful >> log.txt )
+    echo start_record:%start_time% %timezone% - %cont% cicles - max_records=%max%> log.txt
     SET /a cont+=1
     goto :eof
     
