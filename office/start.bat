@@ -1,28 +1,33 @@
 echo off
 setlocal enabledelayedexpansion
+color 0e
 
-:: setting each config.ini variable
 SET cont=1
-for /f "tokens=*" %%i in (config.ini) do (
-            SET %%i
-            call :test 
-        )
-
+call :import config.ini
+call :print_menu 
 SET /P input=Escriba un numero: 
-call :start
-
+call :start_download
 pause
 
-:test
-    if defined menu%cont% (
-    echo [!cont!]. !menu%cont%!
-        SET /a cont+=1
+:import file
+    for /f "tokens=*" %%i in (%1%) do (
+        SET %%i
     )
     goto :eof
 
-:start
+:print_menu
+    if defined menu%cont% (
+    echo [!cont!]. !menu%cont%!
+        SET /a cont+=1
+        call :print_menu
+    )
+    echo.
+    goto :eof
+
+:start_download
     cls
     echo ...downloading !menu%input%! in progress
     %installer% !option%input%! !command%input%!
-    REM %installer% /configure 
-
+    %installer% /configure !command%input%!
+    echo Instalacion finalizada. Ya puede activar sus productos office.
+    goto :eof
