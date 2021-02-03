@@ -1,0 +1,2 @@
+nircmd monitor off
+exit
